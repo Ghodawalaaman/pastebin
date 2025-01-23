@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastebin</title>
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        /* Container for the form */
+        .container {
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            width: 400px;
+            text-align: center;
+        }
+
+        /* Title */
+        .container h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Textarea styling */
+        textarea {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1rem;
+            resize: none;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        textarea:focus {
+            border: 1px solid #4facfe;
+            box-shadow: 0 0 8px rgba(79, 172, 254, 0.6);
+        }
+
+        /* Button styling */
+        .submit-btn {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            textarea {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create a New Paste</h1>
+        <form method="post" action="/submit">
+            <textarea name="pasted_data" placeholder="Start writing..."></textarea>
+            <br />
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        <br/>
+        <hr/>
+        <br/>
+        <h4>you can also paste using command line:</h4>
+        <h4><i>curl http://paste1.duckdns.org/submit --data-urlencode "pasted_data=This is some data"</i></h4>
+    </div>
+</body>
+</html>
