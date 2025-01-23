@@ -27,22 +27,19 @@ async fn handle(Path(id): Path<String>) -> (StatusCode, String) {
 }
 
 async fn submit_handle(upload: Form<Upload>) -> String {
-    if let Form(u) = upload {
-        let pasted_data = u.pasted_data;
-        if pasted_data.len() > MAX_FILE_SIZE {
-            // Don't store the file if it exceeds max size
-            return String::from("ERROR: max size exceeded");
-        }
-        let path = Uuid::new_v4();
-        let mut output = File::create(path.to_string()).unwrap();
-        write!(output, "{}", pasted_data).unwrap();
-        let mut url = String::from("https://paste1.duckdns.org/");
-        url.push_str(&path.to_string());
-        url.push_str("\n"); // appending a newline
-        return url;
-    } else {
-        return "ERROR: unknown error".to_string();
+    let Form(u) = upload;
+    let pasted_data = u.pasted_data;
+    if pasted_data.len() > MAX_FILE_SIZE {
+        // Don't store the file if it exceeds max size
+        return String::from("ERROR: max size exceeded");
     }
+    let path = Uuid::new_v4();
+    let mut output = File::create(path.to_string()).unwrap();
+    write!(output, "{}", pasted_data).unwrap();
+    let mut url = String::from("https://paste1.duckdns.org/");
+    url.push_str(&path.to_string());
+    url.push_str("\n"); // appending a newline
+    return url;
 }
 
 async fn delete_handle(Path(id): Path<String>) -> String {
